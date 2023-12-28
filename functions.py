@@ -57,4 +57,23 @@ def count_columns_with_zeros(df):
 
     return result_df 
 
+## Remove columns with all zero values from our dataframe
+def remove_cols_with_all_zero(df):
 
+    """ 
+    This function will identify the columns with all zero values
+    and remove it from our dataframe.
+    
+    I could just use this function without using the 
+    "count_columns_with_zeros" function to make it faster. For this purpose, I 
+    wanted to visualize the comparison.
+    """
+
+    #Identify the columns with all zero values
+    all_zero_cols = df.columns[(df == 0).all()]
+
+    #Remove the columns from the dataframe
+    filtered_df = df.drop(columns=all_zero_cols)
+
+    #Return our filtered df
+    return filtered_df 
