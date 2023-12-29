@@ -77,3 +77,23 @@ def remove_cols_with_all_zero(df):
 
     #Return our filtered df
     return filtered_df 
+
+def df_corr_subset(normalized_df, corr_df, corr_threshold, label):
+    """ 
+    This function will allow us to create a subset dataframe from 
+    our original normalized dataframe that contains the columns that 
+    has a certain correlation to our target variable. These subsets 
+    will be used to test our models
+    """
+    
+    # Filter genes based on correlation threshold
+    selected_genes = corr_df[corr_df['Correlation'] >= corr_threshold]['Gene']
+
+    # Create a subset of the original normalized dataframe
+    subset_df = normalized_df[['Unnamed: 0', 'Class'] + list(selected_genes)]
+
+    # Save the subset dataframe to a CSV file
+    subset_filename = f'subset_{label}.csv'
+    subset_df.to_csv(subset_filename, index=False)
+
+    return subset_df
