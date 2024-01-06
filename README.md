@@ -8,9 +8,14 @@ This project explores a
 
 
 ### **Table of Contents**
-  1. [DVD Rental](#dvdrental)
+  1. [Data Pre-processing](#data_preprocessing)
+  2. [Data Normalization](#data_normalization)
 
-<a name="dvdrental"></a>
-#### 1. Sakila DVD Rental database Analysis
-- **Project Link:** [Sakila DVD Rental Analysis](https://github.com/kimberly42787/SQL-Projects-/blob/main/DVD%20Rental_Udacity%20DataSet/README.md)
+
+<a name="data_preprocessing"></a>
+#### 1. Data Pre-Processing
+
+<a name="data_preprocessing"></a>
+#### 2. Data Normalization 
+
   
