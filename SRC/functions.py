@@ -7,6 +7,24 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import os
 
+# Model Evaluation
+from sklearn.metrics import classification_report, precision_score, recall_score, f1_score, matthews_corrcoef, ConfusionMatrixDisplay
+from sklearn.metrics import balanced_accuracy_score
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import roc_curve, auc
+from itertools import cycle
+from sklearn.preprocessing import label_binarize
+import config
+
+from sklearn.feature_selection import mutual_info_classif
+import numpy as np
+
+# Data Visualization 
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
 ### Data Preprocessing Functions
 
 ## Print columns that has null values
@@ -145,7 +163,7 @@ def save_dataframe_to_csv(df, subfolder_path, csv_filename):
 ### Classification Model Functions
 
 # Write a function to split our training and testing data set
-def split_train_test_data(df):
+def split_train_test_data(X, Y):
     """
     Function splits our features and target variable from each other.
     
@@ -156,22 +174,20 @@ def split_train_test_data(df):
     """
 
     # Our features all start fron the 4th column and our target is "Class"
-    X = df.iloc[:,3:] # features
-    Y = df['class_encoded'] # target variable 
+    X = X # features
+    Y = Y # target variable 
 
     # Split our data into training, validation, and testing datasets
-    x_train, x_rest, y_train, y_rest = train_test_split(X, Y, train_size = 0.70, random_state = 42) # 70% is for training
+    x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size = 0.2, random_state = 42) # 80% is for training
 
-    x_val, x_test, y_val, y_test = train_test_split(x_rest, y_rest, test_size = 0.5, random_state = 42)
-
-    return x_train, x_test, x_val, y_train, y_test, y_val
+    return x_train, x_test, y_train, y_test
 
 # Hyperparameter_grid_search 
 def hyperparameter_grid_search(x_val, y_val, param_grid):
 
 
     # Perform grid search for hyperparameter tuning
-    grid_search = GridSearchCV(estimator=RandomForestClassifier(random_state = 42),
+    grid_search = GridSearchCV(estimator=RandomForestClassifier(random_state = None),
                                param_grid = param_grid, 
                                cv = 5)
     grid_search.fit(x_val, y_val)
@@ -181,9 +197,66 @@ def hyperparameter_grid_search(x_val, y_val, param_grid):
 
     return best_params
 
+# Model Evaluation 
+def model_evaluate(y_test, y_pred, labels, pred_prob):
+    # Accuracy
+    balanced_acc = balanced_accuracy_score(y_test, y_pred)
+    acc = accuracy_score(y_test, y_pred)
+    print(f"Balanced Accuracy: {balanced_acc:.4f}")
+    print(f"Accuracy: {acc:.4f}")
 
+    # Precision
+    precision = precision_score(y_test, y_pred, average = 'weighted')
+    print(f"Precision: {precision:.4f}")
 
+    # recall
+    recall = recall_score(y_test, y_pred, average = 'weighted')
+    print(f"Recall: {recall:.4f}")
 
+    # f1 score
+    f1score = f1_score(y_test, y_pred, average = 'weighted')
+    print(f"f1 score: {f1score:.4f}")
+
+    # Class Report
+    class_report = classification_report(y_test, y_pred, target_names = labels)
+    print('\n')
+    print('Classification Report\n')
+    print(class_report)
+
+    # Confusion Matrix
+    cm = confusion_matrix(y_test, y_pred)
+    cm_df = pd.DataFrame(cm, index=labels, columns = labels)
+    print(cm_df)
+
+    # Binarize the labels for each class
+    y_test_bin = label_binarize(y_test, classes=np.unique(y_test))
+
+    # Get decision function scores for each class
+    # y_score = ovr_rf_model.decision_function(X_test_selected)
+
+    # Compute ROC curve and ROC area for each class
+    fpr = dict()
+    tpr = dict()
+    roc_auc = dict()
+
+    n_classes = len(np.unique(y_test))
+    for i in range(n_classes):
+        fpr[i], tpr[i], _ = roc_curve(y_test_bin[:, i], pred_prob[:, i])
+        roc_auc[i] = auc(fpr[i], tpr[i])
+
+    # Plot ROC curves for each class
+    plt.figure(figsize=(7, 5))
+    colors = cycle(['aqua', 'darkorange', 'cornflowerblue'])
+    for i, color in zip(range(n_classes), colors):
+        plt.plot(fpr[i], tpr[i], color=color, lw=2,
+             label=f'ROC curve (class {i}) (area = {roc_auc[i]:.2f})')
+
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('ROC Curve for each class')
+    plt.legend(loc='lower right')
+    plt.show()
 
 
 
