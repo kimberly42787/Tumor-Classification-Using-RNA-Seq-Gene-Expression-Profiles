@@ -5,13 +5,13 @@ The goal of this project is to analyze RNA-seq data taken from various cancer pa
 
 The data used for this project can be found here: https://archive.ics.uci.edu/dataset/401/gene+expression+cancer+rna+seq
 
-### **Table of Contents**
+## **Table of Contents**
   1. [Data Exploration](#data_exploration)
   2. [Data Pre-Processing](#data_preprocessing)
   3. [Classification Models](#classification_models)
 
 <a name="data_exploration"></a>
-#### 1. Data Exploration
+### Data Exploration
 
 The first step of my pipeline is to perform the EDA. This will give us a better understanding of the dataset we are working with. 
 
@@ -32,9 +32,9 @@ In addition to checking for null values, an examination was conducted to identif
 The visualization above illustrates the count of columns (genes) with all zero values and those with atleast one non-zero value, providing insights into the distribution of such genes in the dataset.
 
 <a name="data_preprocessing"></a>
-#### 2. Data Normalization 
+### Data Pre-Processing
 
   
 
 <a name="classification_models"></a>
-#### 2. Classification Models
+### Classification Models
