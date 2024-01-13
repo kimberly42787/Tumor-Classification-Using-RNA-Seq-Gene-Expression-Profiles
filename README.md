@@ -27,7 +27,7 @@ Fortunately, the dataset did not contain any null values.
 
 In addition to checking for null values, an examination was conducted to identify columns with all zero values. While this step may not be necessary for every dataset, it was deemed essential in this context. The objective was to ascertain if there were any genes in the dataset with zero expression across all samples.
 
-![Columns with all zero values count](Visualization/All Zero Values Counts.png)
+<img width="494" alt="All Zero Values Counts" src="https://github.com/kimberly42787/RNA-Seq_GeneExpression_Model/assets/56846342/6fd862e7-13ea-448f-81d1-9a9879b54d94">
 
 The visualization above illustrates the count of columns (genes) with all zero values and those with atleast one non-zero value, providing insights into the distribution of such genes in the dataset.
 
