@@ -25,16 +25,40 @@ Fortunately, the dataset did not contain any null values.
 
 **2. Handling Columns with Zero Values:**
 
-In addition to checking for null values, an examination was conducted to identify columns with all zero values. While this step may not be necessary for every dataset, it was deemed essential in this context. The objective was to ascertain if there were any genes in the dataset with zero expression across all samples.
+In addition to checking for null values, an examination was conducted to identify columns with all zero values. While this step may not be necessary for every dataset, it was deemed essential in this context. The objective was to check if there were any genes in the dataset with zero expression across all samples.
 
 <img width="494" alt="All Zero Values Counts" src="https://github.com/kimberly42787/RNA-Seq_GeneExpression_Model/assets/56846342/6fd862e7-13ea-448f-81d1-9a9879b54d94">
 
 The visualization above illustrates the count of columns (genes) with all zero values and those with atleast one non-zero value, providing insights into the distribution of such genes in the dataset.
 
+Knowing that those genes with all zero values will not effect our model, we can clean up our dataset a little more by removing all the columns (genes) with all zero values. Our columns count went from 20533 genes to 20266 genes.
+
+**3. Dealing with Imbalanced Data:**
+
+Next, I checked class distribution. The dataset have 5 unique tumor types. I want to check the distribution of my data set. From this bar graph, BRCA has the highest distribution at 300 and COAD having the lowest at 78. If the model is trained with this class distribution, then the model will favor certain classes over the other as the data is imbalanced. 
+
+ADD GRAPH
+
+
+There are different ways to handle imbalanced data for classsification models. Some of the ways are:
+- Using specific algorithm that are less sensitive to imbalanced data. Some classification algorithms, such as Random Forest and Gradient Boosting, are more robust in handling imbalanced datasets. 
+- Adjusting class weights during model training.
+- Resampling: 
+  - One way is to undersample the majority class. This involves removinf samples from the majority classes to balance out the minority classes. 
+  - Another way is oversampling the minority classes. This would generate synthetic samples for the minority classes to balance out the class distribution. 
+  - Another way is SMOTE. This stands for Synthetic Minority Over-Sampling Technique. This technique generates synthetic samples for the minority classes. 
+
+For this dataset and modeling, I will be using the SMOTE technique to handle the imbalanced data. This technique is different from oversampling the minority classes. The SMOTE technique generates synthetic samples for the minority classes by considering the features of the existing minority classes and their nearest neighbors. Unlike oversampling the minority classes, this technique helps to avoid overfitting on duplicated samples. 
+
+ADD GRAPH 
+
+This visualization showed the class distribution after applying SMOTE to balance the dataset. Now, all of our unique tumor types contain 300 datasets. The cleaned, balanced dataset is save as Gen_Expression_Data.csv to be used for our Data Pre-processing
+
 <a name="data_preprocessing"></a>
 ### Data Pre-Processing
 
-  
+=
 
 <a name="classification_models"></a>
 ### Classification Models
+
