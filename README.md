@@ -57,7 +57,28 @@ This visualization showed the class distribution after applying SMOTE to balance
 <a name="data_preprocessing"></a>
 ### Data Pre-Processing
 
-=
+Currently, the dataset is not in the right format to process for a machine learning model. This section, I will go through the steps I did to transform the dataset for my model. 
+
+**1. Encoding Categorical Labels with Numerical Values**
+
+LabelEncoder() from the scikit-learn library was used to turn our categorical columnm ("Class") that holds the tumor type labels. The objective of this is to convert the categorical labels into numerical representations suitable for training classification models. The encoded values are then stored in a new column, "class_encoded" which will be used in the machine learning pipeline later on. 
+
+**2. Data Normalization using MinMaxScaler()**
+Given the inherent variability in gene expression values, it is paramount to normalize the data before incorporating it into our model. Data normalization is a critical step in ensuring that genes with disparate expression magnitudes do not unduly influence the analysis, mitigating the risk of false results. In this project, I opted for the MinMaxScaler class from scikit-learn to achieve this normalization. The MinMaxScaler scales the values of each gene's expression to a specified range, typically [0, 1]. This uniform scaling is essential to prevent genes with larger expression values from disproportionately impacting the analysis. The resultant normalized gene expression data, with values confined to a consistent scale, serves as the input for both training and testing our model, contributing to the model's robustness and interpretability.
+
+**3. Subset Data for Testing**
+
+In order to assess the performance of our machine learning model, a dedicated subset of the data has been created for testing purposes. This subset is distinct from the training and testing datasets and is designed to evaluate the model's generalization capabilities on unseen data. By employing a separate subset for testing, we aim to obtain a more accurate representation of the model's real-world performance. The subset data has been carefully curated to encompass a diverse range of samples, ensuring robust evaluation metrics that reflect the model's efficacy beyond the training set.
+
+**4. Separation of Features and Target Value**
+To prepare the data for model training, I separated the dataset into two subsets, features and target value. The features represent the gene expression data that will used as the input variables used for prediction. The target value is the ouput variable we aim to predict which is the tumor types. 
+
+**5. Data Splitting into Training and Testing Sets**
+
+The data is then split into the training and testing sets using the train_test_split() function from scikit-learn. 80% of the data will be used as the training set, while the remaining 20% is for the testing set. The random_state parameter is set to 42 to ensure reproducibility of the split. This approach ensures a randomized dataset feeding into the moddel, so it can learn from a diverse set of samples that contributes to a more reliable assessment of the model. 
+
+**6. Feature Selection** 
+The last step of Data Pre-processing is feature selection. PCA (Principal Component Analysis) has been applied for feature selection. PCA is dimensionality reduction technique that transform high-dimensional data into a lower dimensional representation while retaining as much of the original variability as possible. The transformed featirs will be used as the input for the model. 
 
 <a name="classification_models"></a>
 ### Classification Models
