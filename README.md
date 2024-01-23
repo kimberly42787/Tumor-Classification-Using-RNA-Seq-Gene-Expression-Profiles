@@ -95,7 +95,7 @@ I conducted an in-depth exploration of multiple classification models to identif
   - Gradient Boosting
   - Gaussian Naive Bayes (NB)
   - ADA Boost Classifier
-  - 
+    
 The evaluation of these models was centered around their performance in accurately classifying tumor types. Some models exhibited superior predictive capabilities, while others showed varying levels of performance.
 
 The assessment of the models was conducted using the following metrics:
