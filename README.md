@@ -37,8 +37,7 @@ Knowing that those genes with all zero values will not effect our model, we can 
 
 Next, I checked class distribution. The dataset have 5 unique tumor types. I want to check the distribution of my data set. From this bar graph, BRCA has the highest distribution at 300 and COAD having the lowest at 78. If the model is trained with this class distribution, then the model will favor certain classes over the other as the data is imbalanced. 
 
-ADD GRAPH
-
+![Screenshot 2024-01-22 at 7 13 53 PM](https://github.com/kimberly42787/Tumor-Classification-Using-RNA-Seq-Gene-Expression-Profiles/assets/56846342/df06ec78-c9f5-463b-b793-bd0547b7443b)
 
 There are different ways to handle imbalanced data for classsification models. Some of the ways are:
 - Using specific algorithm that are less sensitive to imbalanced data. Some classification algorithms, such as Random Forest and Gradient Boosting, are more robust in handling imbalanced datasets. 
@@ -50,7 +49,7 @@ There are different ways to handle imbalanced data for classsification models. S
 
 For this dataset and modeling, I will be using the SMOTE technique to handle the imbalanced data. This technique is different from oversampling the minority classes. The SMOTE technique generates synthetic samples for the minority classes by considering the features of the existing minority classes and their nearest neighbors. Unlike oversampling the minority classes, this technique helps to avoid overfitting on duplicated samples. 
 
-ADD GRAPH 
+![Screenshot 2024-01-22 at 7 13 11 PM](https://github.com/kimberly42787/Tumor-Classification-Using-RNA-Seq-Gene-Expression-Profiles/assets/56846342/24492006-fe97-4e4f-9be8-eb8d6522a395)
 
 This visualization showed the class distribution after applying SMOTE to balance the dataset. Now, all of our unique tumor types contain 300 datasets. The cleaned, balanced dataset is save as Gen_Expression_Data.csv to be used for our Data Pre-processing
 
