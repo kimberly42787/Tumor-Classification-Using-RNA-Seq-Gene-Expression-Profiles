@@ -85,3 +85,26 @@ The last step of Data Pre-processing is feature selection. PCA (Principal Compon
 <a name="classification_models"></a>
 ### Classification Models
 
+I conducted an in-depth exploration of multiple classification models to identify the optimal model/s for predicting tumor types based on gene expression RNA-seq data. The models included in the analysis are as follows:
+
+  - Random Forest
+  - Support Vector Classifier (SVC)
+  - Logistic Regression
+  - K-Nearest Neighbors (KNN)
+  - Decision Tree
+  - Gradient Boosting
+  - Gaussian Naive Bayes (NB)
+  - ADA Boost Classifier
+  - 
+The evaluation of these models was centered around their performance in accurately classifying tumor types. Some models exhibited superior predictive capabilities, while others showed varying levels of performance.
+
+The assessment of the models was conducted using the following metrics:
+
+  - Accuracy
+  - Precision
+  - Recall
+  - F1 Score
+  - Confusion Matrix
+  - ROC Curve
+    
+These metrics collectively provide a comprehensive understanding of the classification models' performance, facilitating informed decisions on model selection based on the specific requirements of predicting tumor types from the provided gene expression RNA-seq data. 
